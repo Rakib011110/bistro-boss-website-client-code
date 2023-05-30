@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import {
@@ -9,6 +9,9 @@ import {
 } from "react-simple-captcha";
 
 const Login = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,9 +21,17 @@ const Login = () => {
   };
 
   useEffect(() => {
-    loadCaptchaEnginge(6);
+    loadCaptchaEnginge(2);
   }, []);
 
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
   return (
     <div>
       <>
@@ -67,17 +78,20 @@ const Login = () => {
                   </label>
                 </div>
                 <div className="form-control">
-                  <label className="label"></label>
+                  <label className="label">
+                    <LoadCanvasTemplate />
+                  </label>
                   <input
+                    onBlur={handleValidateCaptcha}
                     type="text"
                     name="captcha"
                     placeholder="type the captcha above"
                     className="input input-bordered"
                   />
-                  <LoadCanvasTemplate />
                 </div>
                 <div className="form-control mt-6">
                   <input
+                    disabled={disabled}
                     className="btn btn-primary"
                     type="submit"
                     value="Login"
