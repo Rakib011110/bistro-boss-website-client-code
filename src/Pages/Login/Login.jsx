@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
   const handleLogin = (event) => {
@@ -10,6 +16,10 @@ const Login = () => {
     const password = form.password.value;
     console.log(email, password);
   };
+
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
 
   return (
     <div>
@@ -64,6 +74,7 @@ const Login = () => {
                     placeholder="type the captcha above"
                     className="input input-bordered"
                   />
+                  <LoadCanvasTemplate />
                 </div>
                 <div className="form-control mt-6">
                   <input
