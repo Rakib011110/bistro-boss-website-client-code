@@ -21,13 +21,18 @@ const Navbar = () => {
       <li>
         <Link to="/order/salad">Order Food</Link>
       </li>
+      <li>
+        <Link to="/">
+          <button className="btn gap-2">
+            Inbox
+            <div className="badge badge-secondary">+99</div>
+          </button>
+        </Link>
+      </li>
       {user ? (
         <>
           <button onClick={handleLogOut} className="btn btn-ghost">
             LogOut
-          </button>
-          <button onClick={handleLogOut} className="btn btn-ghost">
-            {user?.displayName}
           </button>
         </>
       ) : (
