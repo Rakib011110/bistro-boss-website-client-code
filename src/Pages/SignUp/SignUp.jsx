@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const {
@@ -24,7 +25,17 @@ const SignUp = () => {
         .then(() => {
           console.log("user profile info updated");
           reset();
-
+          if (data.user) {
+            Swal.fire({
+              title: "User Login Successful.",
+              showClass: {
+                popup: "animate__animated animate__fadeInDown",
+              },
+              hideClass: {
+                popup: "animate__animated animate__fadeOutUp",
+              },
+            });
+          }
           navigate("/");
         })
         .catch((error) => console.log(error));

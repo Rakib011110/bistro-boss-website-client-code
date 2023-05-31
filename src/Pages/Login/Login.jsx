@@ -8,6 +8,7 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const captchaRef = useRef(null);
@@ -26,7 +27,17 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
-
+      if (user) {
+        Swal.fire({
+          title: "User Login Successful.",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+      }
       navigate(from, { replace: true });
     });
   };
