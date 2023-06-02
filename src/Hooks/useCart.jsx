@@ -8,6 +8,8 @@ const useCart = () => {
   const {
     isLoading,
     isError,
+    refetch,
+
     data: cart = [],
   } = useQuery({
     queryKey: ["cart", user?.email],
@@ -19,7 +21,7 @@ const useCart = () => {
     },
   });
 
-  return [cart, isLoading];
+  return [cart, isLoading, refetch];
 };
 
 export default useCart;
