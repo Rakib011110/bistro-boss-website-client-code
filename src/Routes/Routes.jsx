@@ -8,6 +8,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import PrivetRoutes from "./PrivetRoutes";
 import Dashbord from "../Layouts/Dashbord/Dashbord";
 import MyCart from "../Pages/Dashbordpage/MyCart/MyCart";
+import Allusers from "../Pages/Dashbordpage/Allusers/Allusers";
 
 export const router = createBrowserRouter([
   {
@@ -38,11 +39,19 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashbord",
-    element: <Dashbord></Dashbord>,
+    element: (
+      <PrivetRoutes>
+        <Dashbord></Dashbord>
+      </PrivetRoutes>
+    ),
     children: [
       {
         path: "mycart",
         element: <MyCart></MyCart>,
+      },
+      {
+        path: "allusers",
+        element: <Allusers></Allusers>,
       },
     ],
   },
